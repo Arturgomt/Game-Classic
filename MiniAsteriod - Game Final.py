@@ -7,8 +7,8 @@ pygame.font.init()
 fonte = pygame.font.SysFont("Arial", 36)
 
 pontuacao = 0
-game_over = False # Controla se o jogo acabou ou não
-numero_asteroides = 5 # <-- NOVA VARIÁVEL
+game_over = False 
+numero_asteroides = 5 
 
 LARGURA, ALTURA = 800, 600
 tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -107,21 +107,20 @@ class Asteroide:
                 
                 if pos_teste.distance_to(centro_tela) > zona_segura:
                     self.posicao = pos_teste
-                    break # ... sai do loop e aprova a posição!
+                    break
         
         if raio is not None:
             self.raio = raio
         else:
             self.raio = random.randint(30, 50)
 
-        # 3. Vetor de Movimento do Asteriod
         angulo_vel = random.uniform(0, 360)
         radianos_vel = math.radians(angulo_vel)
         direcao = pygame.math.Vector2(math.cos(radianos_vel), math.sin(radianos_vel))
         self.velocidade = direcao * random.uniform(1, 3)
         
-        self.offsets_pontos = [] # Guarda a distância de cada ponta em relação ao centro
-        num_pontos = random.randint(8, 12) # O asteroide terá entre 8 e 12 lados
+        self.offsets_pontos = [] 
+        num_pontos = random.randint(8, 12) 
         
         for i in range(num_pontos):
             angulo_ponto = math.radians((360 / num_pontos) * i)
@@ -200,7 +199,7 @@ while rodando:
                 if distancia < soma_raios:
                     ast1.velocidade, ast2.velocidade = ast2.velocidade, ast1.velocidade
                     
-                    if distancia > 0: # Evita erro de divisão por zero
+                    if distancia > 0: 
                         sobreposicao = soma_raios - distancia 
                         
                         direcao_afastamento = (ast1.posicao - ast2.posicao).normalize()
@@ -260,7 +259,6 @@ while rodando:
 
     if game_over:
         texto_go = fonte.render("GAME OVER - Aperte 'R' para reiniciar", True, BRANCO)
-        # Calcula o centro da tela para o texto
         rect_texto = texto_go.get_rect(center=(LARGURA/2, ALTURA/2))
         tela.blit(texto_go, rect_texto)
     
@@ -268,3 +266,4 @@ while rodando:
 
 
 pygame.quit()
+
